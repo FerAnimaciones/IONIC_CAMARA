@@ -1,0 +1,15 @@
+
+cordova platform add android
+cordova build --release android
+
+
+cd platforms/android/build/outputs/apk
+keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore android-release-unsigned.apk alias_name
+zipalign -v 4 android-release-unsigned.apk camara.apk
+
+REGENERAR ICONOS Y SPLASH
+ionic cordova resources --help
+ionic cordova resources
+ionic cordova resources ios
+ionic cordova resources android
